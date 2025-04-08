@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: usuarios-servicio
+          uri: lb://usuarios-servicio
+          predicates:
+            - Path=/api/usuarios/**
+        - id: asignaturas-servicio
+          uri: lb://asignaturas-servicio
+          predicates:
+            - Path=/api/asignaturas/**
+        - id: matriculas-servicio
+          uri: lb://matriculas-servicio
+          predicates:
+            - Path=/api/matriculas/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
